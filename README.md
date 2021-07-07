@@ -19,9 +19,10 @@
 
 - has_many :products
 - has_many :comments
-- has_many :buyers
+- has_many :address
+- has_many :purchases
 
-## prototypes テーブル
+## products テーブル
 
 | Column           | Type          | Options                        |
 | ---------------- | ------------- | ------------------------------ |
@@ -40,22 +41,40 @@
 
 - belongs_to :user
 - has_many :comments
-- has_one :buyer
+- has_one :address
+- has_one :purchase
 
 ## comments テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| comment   | text       | null: false                    |
-| user      | references | null: false, foreign_key: true |
-| product   | references | null: false, foreign_key: true |
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| comment    | text       | null: false                    |
+| user_id    | references | null: false, foreign_key: true |
+| product_id | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :product
 
-## buyers テーブル
+## addresses テーブル
+
+| Column                   | Type       | Options                         |
+| ------------------------ | ---------- | ------------------------------- |
+| administrative_divisions | text       | null: false                     |
+| municipalities           | text       | null: false                     |
+| address                  | text       | null: false                     |
+| building_name            | text       |                                 |
+| phone_number             | integer    | null: false                     |
+| user_id                  | references | null: false, foreign_key: true  |
+| product_id               | references | null: false, foreign_key: true  |
+
+### Association
+
+- belongs_to :user
+- belongs_to :product
+
+## purchases テーブル
 
 | Column                   | Type       | Options                         |
 | ------------------------ | ---------- | ------------------------------- |
@@ -63,13 +82,8 @@
 | effective_date_month     | integer    | null: false, length{ in: 1..2 } |
 | effective_date_year      | integer    | null: false, length{ in: 2 }    |
 | postal_code              | integer    | null: false, length{ in: 3..4 } |
-| administrative_divisions | text       | null: false                     |
-| municipalities           | text       | null: false                     |
-| address                  | text       | null: false                     |
-| building_name            | text       |                                 |
-| phone_number             | integer    | null: false                     |
-| user                     | references | null: false, foreign_key: true  |
-| product                  | references | null: false, foreign_key: true  |
+| user_id                  | references | null: false, foreign_key: true  |
+| product_id               | references | null: false, foreign_key: true  |
 
 ### Association
 
