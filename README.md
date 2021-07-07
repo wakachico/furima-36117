@@ -2,18 +2,16 @@
 
 ## users テーブル
 
-| Column           | Type    | Options                         |
-| ---------------- | ------- | ------------------------------- |
-| email            | string  | null: false                     |
-| password         | string  | null: false                     |
-| nickname         | string  | null: false                     |
-| first_name       | string  | null: false                     |
-| family_name      | string  | null: false                     |
-| first_name_kana  | string  | null: false                     |
-| family_name_kana | string  | null: false                     |
-| birthday_year    | integer | null: false, length{ in: 4 }    |
-| birthday_month   | integer | null: false, length{ in: 1..2 } |
-| birthday_day     | integer | null: false, length{ in: 1..2 } |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
+| nickname           | string  | null: false |
+| first_name         | string  | null: false |
+| family_name        | string  | null: false |
+| first_name_kana    | string  | null: false |
+| family_name_kana   | string  | null: false |
+| birthday           | date    | null: false |
 
 ### Association
 
@@ -24,18 +22,17 @@
 
 ## products テーブル
 
-| Column           | Type          | Options                        |
-| ---------------- | ------------- | ------------------------------ |
-| product_image    | ActiveStorage |                                |
-| product_name     | string        | null: false                    |
-| product_text     | text          | null: false                    |
-| product_category | text          | null: false                    |
-| product_status   | text          | null: false                    |
-| shipping_cost    | text          | null: false                    |
-| shipping_area    | text          | null: false                    |
-| shipping_time    | text          | null: false                    |
-| selling_price    | integer       | null: false                    |
-| user_id          | references    | null: false, foreign_key: true |
+| Column              | Type          | Options                         |
+| ------------------- | ------------- | ------------------------------- |
+| name                | string        | null: false                     |
+| text                | text          | null: false                     |
+| product_category_id | integer       | null: false                     |
+| product_status_id   | integer       | null: false                     |
+| shipping_cost_id    | integer       | null: false                     |
+| shipping_area_id    | integer       | null: false                     |
+| shipping_time_id    | integer       | null: false                     |
+| selling_price       | integer       | null: false                     |
+| user                | references    | null: false, foreign_key: true  |
 
 ### Association
 
@@ -43,14 +40,19 @@
 - has_many :comments
 - has_one :address
 - has_one :purchase
+- belongs_to_active_hash :product_category
+- belongs_to_active_hash :product_status
+- belongs_to_active_hash :shipping_cost
+- belongs_to_active_hash :shipping_area
+- belongs_to_active_hash :shipping_time
 
 ## comments テーブル
 
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
 | comment    | text       | null: false                    |
-| user_id    | references | null: false, foreign_key: true |
-| product_id | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
+| product    | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -66,8 +68,8 @@
 | address                  | text       | null: false                     |
 | building_name            | text       |                                 |
 | phone_number             | integer    | null: false                     |
-| user_id                  | references | null: false, foreign_key: true  |
-| product_id               | references | null: false, foreign_key: true  |
+| user                     | references | null: false, foreign_key: true  |
+| product                  | references | null: false, foreign_key: true  |
 
 ### Association
 
@@ -78,12 +80,8 @@
 
 | Column                   | Type       | Options                         |
 | ------------------------ | ---------- | ------------------------------- |
-| credit_card_number       | integer    | null: false, length{ in: 16 }   |
-| effective_date_month     | integer    | null: false, length{ in: 1..2 } |
-| effective_date_year      | integer    | null: false, length{ in: 2 }    |
-| postal_code              | integer    | null: false, length{ in: 3..4 } |
-| user_id                  | references | null: false, foreign_key: true  |
-| product_id               | references | null: false, foreign_key: true  |
+| user                     | references | null: false, foreign_key: true  |
+| product                  | references | null: false, foreign_key: true  |
 
 ### Association
 
