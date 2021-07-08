@@ -15,11 +15,11 @@
 
 ### Association
 
-- has_many :products
+- has_many :items
 - has_many :comments
-- has_many :purchases
+- has_many :orders
 
-## products テーブル
+## items テーブル
 
 | Column              | Type          | Options                         |
 | ------------------- | ------------- | ------------------------------- |
@@ -28,7 +28,7 @@
 | category_id         | integer       | null: false                     |
 | status_id           | integer       | null: false                     |
 | shipping_cost_id    | integer       | null: false                     |
-| area_id             | integer       | null: false                     |
+| prefecture_id       | integer       | null: false                     |
 | shipping_time_id    | integer       | null: false                     |
 | selling_price       | integer       | null: false                     |
 | user                | references    | null: false, foreign_key: true  |
@@ -37,11 +37,11 @@
 
 - belongs_to             :user
 - has_many               :comments
-- has_one                :purchase
+- has_one                :order
 - belongs_to_active_hash :product_category
 - belongs_to_active_hash :product_status
 - belongs_to_active_hash :shipping_cost
-- belongs_to_active_hash :area
+- belongs_to_active_hash :prefecture
 - belongs_to_active_hash :shipping_time
 
 ## comments テーブル
@@ -50,19 +50,19 @@
 | ---------- | ---------- | ------------------------------ |
 | comment    | text       | null: false                    |
 | user       | references | null: false, foreign_key: true |
-| product    | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :product
+- belongs_to :item
 
-## purchases テーブル
+## orders テーブル
 
-| Column                   | Type       | Options                         |
-| ------------------------ | ---------- | ------------------------------- |
-| user                     | references | null: false, foreign_key: true  |
-| product                  | references | null: false, foreign_key: true  |
+| Column  | Type       | Options                         |
+| ------- | ---------- | ------------------------------- |
+| user    | references | null: false, foreign_key: true  |
+| item    | references | null: false, foreign_key: true  |
 
 ### Association
 
@@ -75,14 +75,14 @@
 | Column                   | Type       | Options                         |
 | ------------------------ | ---------- | ------------------------------- |
 | postal_code              | string     | null: false                     |
-| area_id                  | integer    | null: false                     |
-| municipalities           | string     | null: false                     |
+| prefecture_id            | integer    | null: false                     |
+| city                     | string     | null: false                     |
 | address                  | string     | null: false                     |
-| building_name            | string     |                                 |
+| building                 | string     |                                 |
 | phone_number             | string     | null: false                     |
-| purchase                 | references | null: false, foreign_key: true  |
+| order                    | references | null: false, foreign_key: true  |
 
 ### Association
 
-- belongs_to :purchase
-- belongs_to_active_hash :area
+- belongs_to :order
+- belongs_to_active_hash :prefecture
