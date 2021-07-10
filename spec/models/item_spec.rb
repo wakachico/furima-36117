@@ -81,6 +81,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Selling price is not a number")
       end
+      it '半角英数混合では商品出品できない' do
+        @item.selling_price = "2r4fse4"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Selling price is not a number")
+      end
+      it '半角英語だけでは商品出品できない' do
+        @item.selling_price = "eigodakedame"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Selling price is not a number")
+      end
       it 'ユーザーが紐付いていなければ投稿できない' do
         @item.user = nil
         @item.valid?
