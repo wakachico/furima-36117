@@ -37,6 +37,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destory
+    
+  end
+
   private
   def move_to_index
     unless current_user.id == @item.user.id
