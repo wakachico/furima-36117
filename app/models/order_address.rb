@@ -4,9 +4,9 @@ class OrderAddress
 
   with_options presence: true do
     validates :item_id, :user_id, :city, :block, :token
-    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'を「3桁の数値-4桁の数値」の形で入力してください' }
+    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'は「3桁の半角数字-4桁の半角数字」の形で入力してください' }
     validates :prefecture_id, numericality: { other_than: 1 }
-    validates :phone_number,  format: { with: /\A\d{10,11}\z/, message: 'を10桁or11桁の数値で入力してください' }
+    validates :phone_number,  format: { with: /\A\d{10,11}\z/, message: 'は10桁or11桁の半角数字で入力してください' }
   end
 
   def save
