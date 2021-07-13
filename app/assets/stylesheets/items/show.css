@@ -181,7 +181,33 @@
 }
 
 .comment-flag-icon {
-  margin: 10px 5px 0 0;
+  line-height: 48px;
+  margin: 10px 5px 15px 0;
+  padding: 0 50px;
+  color: #fff;
+  font-size: 18px;
+  background-color: #3CCACE;
+  border-radius: 30px;
+  border: none;
+}
+
+.comments {
+  padding: 5px;
+  margin-top: 5px;
+  margin-left: 20px;
+  text-align: left;
+}
+
+.comments a {
+  color: #57C3E9;
+}
+
+.comments a:hover {
+  text-decoration: underline;
+}
+
+.comment-list{
+  margin-left: 20px;
 }
 
 .links {
